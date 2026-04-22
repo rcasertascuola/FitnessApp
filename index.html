@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodybuilding Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
 :root {
     --primary-color: #007bff;
@@ -359,6 +360,22 @@ textarea {
                 <p class="empty-msg">Nessun allenamento registrato.</p>
             </div>
         </section>
+
+        <section id="statistics-section" class="card">
+            <h2>Statistiche</h2>
+            <div style="margin-bottom: 20px;">
+                <h3>Durata Allenamenti</h3>
+                <canvas id="durationChart"></canvas>
+            </div>
+            <div>
+                <h3>Volume per Esercizio</h3>
+                <div class="form-group">
+                    <label for="stat-exercise-select">Seleziona Esercizio:</label>
+                    <select id="stat-exercise-select"></select>
+                </div>
+                <canvas id="volumeChart"></canvas>
+            </div>
+        </section>
     </div>
 
     <!-- Template per un esercizio -->
@@ -417,6 +434,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const historyContainer = document.getElementById('history-container');
     const clearHistoryBtn = document.getElementById('clear-history-btn');
 
+    // DOM Elements - Statistics
+    const statExerciseSelect = document.getElementById('stat-exercise-select');
+
     // Templates
     const exerciseTemplate = document.getElementById('exercise-template');
     const setTemplate = document.getElementById('set-template');
@@ -427,6 +447,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerInterval = null;
     let sessionSeconds = 0;
     let isPaused = false;
+
+    // Chart instances
+    let durationChartInstance = null;
+    let volumeChartInstance = null;
 
     // --- EVENT LISTENERS ---
 
@@ -642,7 +666,135 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             historyContainer.appendChild(div);
         });
+
+        renderCharts();
     }
+
+    function renderCharts() {
+        const history = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+        if (history.length === 0) {
+            if (durationChartInstance) durationChartInstance.destroy();
+            if (volumeChartInstance) volumeChartInstance.destroy();
+            statExerciseSelect.innerHTML = '';
+            return;
+        }
+
+        // Sort history chronologically for charts
+        const chronHistory = [...history].sort((a, b) => a.id - b.id);
+
+        // --- Duration Chart ---
+        const durationLabels = chronHistory.map(session => new Date(session.startTime).toLocaleDateString('it-IT'));
+        const durationData = chronHistory.map(session => session.duration / 60); // In minutes
+
+        if (durationChartInstance) durationChartInstance.destroy();
+        const ctxDuration = document.getElementById('durationChart').getContext('2d');
+        durationChartInstance = new Chart(ctxDuration, {
+            type: 'line',
+            data: {
+                labels: durationLabels,
+                datasets: [{
+                    label: 'Durata (minuti)',
+                    data: durationData,
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // --- Volume Chart setup ---
+        const exercisesSet = new Set();
+        chronHistory.forEach(session => {
+            if (session.exercises) {
+                session.exercises.forEach(ex => exercisesSet.add(ex.name));
+            }
+        });
+
+        const exercisesList = Array.from(exercisesSet).sort();
+
+        // Remember previously selected exercise to keep it if possible
+        const previousSelection = statExerciseSelect.value;
+
+        statExerciseSelect.innerHTML = '';
+        exercisesList.forEach(exName => {
+            const option = document.createElement('option');
+            option.value = exName;
+            option.textContent = exName;
+            statExerciseSelect.appendChild(option);
+        });
+
+        if (previousSelection && exercisesList.includes(previousSelection)) {
+            statExerciseSelect.value = previousSelection;
+        }
+
+        updateVolumeChart();
+    }
+
+    function updateVolumeChart() {
+        const selectedExercise = statExerciseSelect.value;
+        if (!selectedExercise) {
+            if (volumeChartInstance) volumeChartInstance.destroy();
+            return;
+        }
+
+        const history = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+        const chronHistory = [...history].sort((a, b) => a.id - b.id);
+
+        const volumeLabels = [];
+        const volumeData = [];
+
+        chronHistory.forEach(session => {
+            if (!session.exercises) return;
+            const exData = session.exercises.find(ex => ex.name === selectedExercise);
+            if (exData && exData.sets) {
+                let totalVolume = 0;
+                exData.sets.forEach(set => {
+                    if (set.completed) {
+                        totalVolume += (set.weight || 0) * (set.reps || 0);
+                    }
+                });
+
+                if (totalVolume > 0 || exData.sets.some(s => s.completed)) {
+                    volumeLabels.push(new Date(session.startTime).toLocaleDateString('it-IT'));
+                    volumeData.push(totalVolume);
+                }
+            }
+        });
+
+        if (volumeChartInstance) volumeChartInstance.destroy();
+        const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+        volumeChartInstance = new Chart(ctxVolume, {
+            type: 'bar',
+            data: {
+                labels: volumeLabels,
+                datasets: [{
+                    label: `Volume (kg) - ${selectedExercise}`,
+                    data: volumeData,
+                    backgroundColor: 'rgba(40, 167, 69, 0.6)',
+                    borderColor: 'rgba(40, 167, 69, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    statExerciseSelect.addEventListener('change', updateVolumeChart);
 
     clearHistoryBtn.addEventListener('click', () => {
         if (confirm('Sei sicuro di voler cancellare tutta la cronologia?')) {

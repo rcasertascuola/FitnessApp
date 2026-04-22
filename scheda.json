@@ -1,0 +1,117 @@
+{
+  "nome": "Scheda Ipertrofia Base",
+  "descrizione": "Scheda di allenamento su 3 giorni (Push/Pull/Legs)",
+  "giorni": [
+    {
+      "nome": "Giorno 1: Push (Petto, Spalle, Tricipiti)",
+      "esercizi": [
+        {
+          "nome": "Panca Piana con bilanciere",
+          "serie": 4,
+          "ripetizioni": "8-10",
+          "modalita": "Rest pause 90s"
+        },
+        {
+          "nome": "Spinte manubri panca inclinata",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Rest pause 60s"
+        },
+        {
+          "nome": "Lento avanti manubri",
+          "serie": 4,
+          "ripetizioni": "8-10",
+          "modalita": "Normale"
+        },
+        {
+          "nome": "Alzate laterali",
+          "serie": 3,
+          "ripetizioni": "12-15",
+          "modalita": "Superserie"
+        },
+        {
+          "nome": "Pushdown tricipiti al cavo",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Isometria 1s in contrazione"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno 2: Pull (Dorso, Bicipiti)",
+      "esercizi": [
+        {
+          "nome": "Trazioni alla sbarra (o Lat Machine)",
+          "serie": 4,
+          "ripetizioni": "8-10",
+          "modalita": "Contrazione controllata"
+        },
+        {
+          "nome": "Rematore con bilanciere",
+          "serie": 4,
+          "ripetizioni": "8-10",
+          "modalita": "Normale"
+        },
+        {
+          "nome": "Pulley basso",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Drop set sull'ultima serie"
+        },
+        {
+          "nome": "Curl con bilanciere",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Normale"
+        },
+        {
+          "nome": "Curl manubri panca inclinata",
+          "serie": 3,
+          "ripetizioni": "12-15",
+          "modalita": "Allungamento enfatizzato"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno 3: Legs (Gambe, Addome)",
+      "esercizi": [
+        {
+          "nome": "Squat con bilanciere",
+          "serie": 4,
+          "ripetizioni": "8-10",
+          "modalita": "Movimento profondo"
+        },
+        {
+          "nome": "Leg Press",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Piedi alti e larghi"
+        },
+        {
+          "nome": "Leg Extension",
+          "serie": 3,
+          "ripetizioni": "12-15",
+          "modalita": "Spremitura di picco 2s"
+        },
+        {
+          "nome": "Leg Curl",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Normale"
+        },
+        {
+          "nome": "Calf seduto",
+          "serie": 4,
+          "ripetizioni": "15-20",
+          "modalita": "Pausa in allungamento"
+        },
+        {
+          "nome": "Crunch a terra",
+          "serie": 3,
+          "ripetizioni": "20",
+          "modalita": "Normale"
+        }
+      ]
+    }
+  ]
+}

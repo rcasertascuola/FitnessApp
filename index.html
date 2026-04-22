@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodybuilding Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bodybuilding Tracker</h1>
+        </header>
+
+        <section id="setup-section" class="card">
+            <h2>Carica Scheda Allenamento</h2>
+            <p>Seleziona un file JSON con la tua scheda di allenamento.</p>
+            <input type="file" id="json-file-input" accept=".json">
+
+            <div id="routine-info" class="hidden">
+                <h3 id="routine-name"></h3>
+                <p id="routine-desc"></p>
+                <div class="form-group">
+                    <label for="workout-day-select">Scegli il giorno:</label>
+                    <select id="workout-day-select"></select>
+                </div>
+                <button id="start-session-btn" class="btn btn-primary">Inizia Sessione</button>
+            </div>
+        </section>
+
+        <section id="session-section" class="card hidden">
+            <div class="session-header">
+                <h2 id="current-day-title">Sessione in corso</h2>
+                <div class="timer-display" id="session-timer">00:00:00</div>
+            </div>
+
+            <div class="session-controls">
+                <button id="pause-resume-btn" class="btn btn-secondary">Pausa</button>
+                <button id="end-session-btn" class="btn btn-danger">Termina Sessione</button>
+            </div>
+
+            <div id="exercises-container">
+                <!-- Gli esercizi verranno inseriti qui dal JavaScript -->
+            </div>
+        </section>
+
+        <section id="history-section" class="card">
+            <h2>Cronologia Allenamenti</h2>
+            <button id="clear-history-btn" class="btn btn-warning btn-sm">Cancella Cronologia</button>
+            <div id="history-container">
+                <!-- La cronologia verrà inserita qui dal JavaScript -->
+                <p class="empty-msg">Nessun allenamento registrato.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Template per un esercizio -->
+    <template id="exercise-template">
+        <div class="exercise-card">
+            <h3 class="exercise-name">Nome Esercizio</h3>
+            <p class="exercise-details">Serie: <span class="sets-count"></span> | Ripetizioni: <span class="reps-target"></span></p>
+            <p class="exercise-mode">Modalità: <span class="exec-mode"></span></p>
+
+            <div class="sets-container">
+                <!-- Le righe delle serie verranno inserite qui -->
+            </div>
+            <div class="exercise-notes">
+                <label>Note esecuzione:</label>
+                <textarea class="notes-input" placeholder="Aggiungi note sull'esecuzione..."></textarea>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template per una singola serie -->
+    <template id="set-template">
+        <div class="set-row">
+            <span class="set-number">Set 1</span>
+            <div class="input-group">
+                <input type="number" class="weight-input" placeholder="Kg" step="0.5" min="0">
+                <span class="input-label">Kg</span>
+            </div>
+            <div class="input-group">
+                <input type="number" class="reps-input" placeholder="Reps" min="0">
+                <span class="input-label">Reps</span>
+            </div>
+            <button class="btn-check-set">✓</button>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -6,6 +6,12 @@
       "nome": "Giorno 1: Push (Petto, Spalle, Tricipiti)",
       "esercizi": [
         {
+          "nome": "Tapis roulant (Riscaldamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata veloce / Corsa leggera"
+        },
+        {
           "nome": "Panca Piana con bilanciere",
           "serie": 4,
           "ripetizioni": "8-10",
@@ -34,12 +40,24 @@
           "serie": 3,
           "ripetizioni": "10-12",
           "modalita": "Isometria 1s in contrazione"
+        },
+        {
+          "nome": "Tapis roulant (Defaticamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata leggera"
         }
       ]
     },
     {
       "nome": "Giorno 2: Pull (Dorso, Bicipiti)",
       "esercizi": [
+        {
+          "nome": "Tapis roulant (Riscaldamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata veloce / Corsa leggera"
+        },
         {
           "nome": "Trazioni alla sbarra (o Lat Machine)",
           "serie": 4,
@@ -69,12 +87,24 @@
           "serie": 3,
           "ripetizioni": "12-15",
           "modalita": "Allungamento enfatizzato"
+        },
+        {
+          "nome": "Tapis roulant (Defaticamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata leggera"
         }
       ]
     },
     {
       "nome": "Giorno 3: Legs (Gambe, Addome)",
       "esercizi": [
+        {
+          "nome": "Tapis roulant (Riscaldamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata veloce / Corsa leggera"
+        },
         {
           "nome": "Squat con bilanciere",
           "serie": 4,
@@ -110,6 +140,12 @@
           "serie": 3,
           "ripetizioni": "20",
           "modalita": "Normale"
+        },
+        {
+          "nome": "Tapis roulant (Defaticamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata leggera"
         }
       ]
     }

@@ -6,6 +6,12 @@
       "nome": "Giorno A – PUSH (Petto, Spalle, Tricipiti, Gambe)",
       "esercizi": [
         {
+          "nome": "Tapis roulant (Riscaldamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata veloce / Corsa leggera"
+        },
+        {
           "nome": "Panca piana bilanciere",
           "serie": 4,
           "ripetizioni": "6-8",
@@ -46,12 +52,24 @@
           "serie": 3,
           "ripetizioni": "4-6",
           "modalita": "Ultima serie: Fermi o Eccentriche lente 3s discesa"
+        },
+        {
+          "nome": "Tapis roulant (Defaticamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata leggera"
         }
       ]
     },
     {
       "nome": "Giorno B – PULL (Dorso, Bicipiti, Addome)",
       "esercizi": [
+        {
+          "nome": "Tapis roulant (Riscaldamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata veloce / Corsa leggera"
+        },
         {
           "nome": "Rematore bilanciere",
           "serie": 4,
@@ -93,6 +111,12 @@
           "serie": 1,
           "ripetizioni": "Tabata",
           "modalita": "Tabata a scelta"
+        },
+        {
+          "nome": "Tapis roulant (Defaticamento)",
+          "serie": 1,
+          "ripetizioni": "10-15 min",
+          "modalita": "Camminata leggera"
         }
       ]
     }

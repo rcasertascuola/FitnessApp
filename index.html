@@ -385,6 +385,11 @@ textarea {
             <div class="input-group">
                 <input type="number" class="weight-input" placeholder="Kg" step="0.5" min="0">
                 <span class="input-label">Kg</span>
+                <select class="weight-type-select" style="margin-left:5px; padding:2px; font-size:0.9rem; border:1px solid #ced4da; border-radius:4px; width:auto; display:inline-block;">
+                    <option value="manubri">Manubri</option>
+                    <option value="bilanciere">Bilanciere (dischi)</option>
+                    <option value="macchinari">Pesi macchinari</option>
+                </select>
             </div>
             <div class="input-group">
                 <input type="number" class="reps-input" placeholder="Reps" min="0">
@@ -564,14 +569,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const btnCheck = setRow.querySelector('.btn-check-set');
                 const weightInput = setRow.querySelector('.weight-input');
+                const weightTypeSelect = setRow.querySelector('.weight-type-select');
                 const repsInput = setRow.querySelector('.reps-input');
 
-                const setData = { weight: 0, reps: 0, completed: false };
+                const setData = { weight: 0, weightType: 'manubri', reps: 0, completed: false };
                 sessionExerciseData.sets.push(setData);
 
                 btnCheck.addEventListener('click', () => {
                     setData.completed = !setData.completed;
                     setData.weight = parseFloat(weightInput.value) || 0;
+                    setData.weightType = weightTypeSelect.value;
                     setData.reps = parseInt(repsInput.value) || 0;
 
                     if (setData.completed) {
@@ -634,11 +641,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const div = document.createElement('div');
             div.className = 'history-item';
+
+            let exercisesHtml = '<ul style="margin-top: 10px; padding-left: 20px; font-size: 0.9rem;">';
+            if (session.exercises && session.exercises.length > 0) {
+                session.exercises.forEach(ex => {
+                    let setsHtml = [];
+                    ex.sets.forEach((set, idx) => {
+                        if (set.completed) {
+                            setsHtml.push(`S${idx+1}: ${set.weight}kg (${set.weightType}) x ${set.reps}`);
+                        }
+                    });
+                    if (setsHtml.length > 0) {
+                        exercisesHtml += `<li><strong>${ex.name}</strong>: ${setsHtml.join(', ')}</li>`;
+                    }
+                });
+            }
+            exercisesHtml += '</ul>';
+
             div.innerHTML = `
                 <h4>${session.dayName}</h4>
                 <p><strong>Data:</strong> ${date} ${time}</p>
                 <p><strong>Scheda:</strong> ${session.routineName}</p>
                 <p><strong>Durata:</strong> ${formatTime(session.duration)}</p>
+                ${exercisesHtml}
             `;
             historyContainer.appendChild(div);
         });

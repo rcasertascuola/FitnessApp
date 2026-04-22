@@ -1,0 +1,100 @@
+{
+  "nome": "Programma Alta Intensità (A/B)",
+  "descrizione": "Programma di allenamento con tecniche di intensità (Rest Pause, Drop Set, Parziali) e progressione su 6 settimane.",
+  "giorni": [
+    {
+      "nome": "Giorno A – PUSH (Petto, Spalle, Tricipiti, Gambe)",
+      "esercizi": [
+        {
+          "nome": "Panca piana bilanciere",
+          "serie": 4,
+          "ripetizioni": "6-8",
+          "modalita": "Ultima serie: Rest Pause (10-15s pausa + reps extra)"
+        },
+        {
+          "nome": "Distensioni manubri su inclinata 30°",
+          "serie": 3,
+          "ripetizioni": "8-10",
+          "modalita": "Ultima serie: Drop set doppio (-20% peso x2)"
+        },
+        {
+          "nome": "Shoulder press manubri",
+          "serie": 3,
+          "ripetizioni": "6-8",
+          "modalita": "Ultima serie: Parziali controllate 6–8 reps"
+        },
+        {
+          "nome": "Alzate laterali manubri",
+          "serie": 3,
+          "ripetizioni": "12-15",
+          "modalita": "Ultima serie: Strip set + isometria 10s"
+        },
+        {
+          "nome": "Pushdown corda",
+          "serie": 3,
+          "ripetizioni": "10-12",
+          "modalita": "Ultima serie: Rest pause"
+        },
+        {
+          "nome": "Estensioni sopra testa manubrio o EZ",
+          "serie": 3,
+          "ripetizioni": "8-10",
+          "modalita": "Ultima serie: Eccentriche lente 4s discesa"
+        },
+        {
+          "nome": "Squat/Stacchi",
+          "serie": 3,
+          "ripetizioni": "4-6",
+          "modalita": "Ultima serie: Fermi o Eccentriche lente 3s discesa"
+        }
+      ]
+    },
+    {
+      "nome": "Giorno B – PULL (Dorso, Bicipiti, Addome)",
+      "esercizi": [
+        {
+          "nome": "Rematore bilanciere",
+          "serie": 4,
+          "ripetizioni": "6-8",
+          "modalita": "Ultima serie: Rest pause"
+        },
+        {
+          "nome": "Rematore macchina o chest supported",
+          "serie": 3,
+          "ripetizioni": "8-10",
+          "modalita": "Ultima serie: Drop set"
+        },
+        {
+          "nome": "Lat machine presa neutra o stretta",
+          "serie": 3,
+          "ripetizioni": "8-10",
+          "modalita": "Ultima serie: Parziali + 10s isometria finale"
+        },
+        {
+          "nome": "Curl bilanciere",
+          "serie": 3,
+          "ripetizioni": "6-8",
+          "modalita": "Ultima serie: Rest pause"
+        },
+        {
+          "nome": "Curl manubri alternato",
+          "serie": 3,
+          "ripetizioni": "8-10",
+          "modalita": "Ultima serie: Drop set"
+        },
+        {
+          "nome": "Curl su panca inclinata",
+          "serie": 2,
+          "ripetizioni": "12",
+          "modalita": "Ultima serie: 21 method (7 basse – 7 alte – 7 complete)"
+        },
+        {
+          "nome": "Addome",
+          "serie": 1,
+          "ripetizioni": "Tabata",
+          "modalita": "Tabata a scelta"
+        }
+      ]
+    }
+  ]
+}

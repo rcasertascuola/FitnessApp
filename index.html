@@ -185,9 +185,27 @@ textarea {
     background-color: #fff;
 }
 
-.exercise-name {
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
     margin-bottom: 5px;
+}
+
+.exercise-name {
+    margin-bottom: 0;
     color: var(--primary-color);
+}
+
+.collapse-icon {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    transition: transform 0.2s;
+}
+
+.exercise-body.hidden {
+    display: none;
 }
 
 .exercise-details, .exercise-mode {
@@ -364,16 +382,21 @@ textarea {
     <!-- Template per un esercizio -->
     <template id="exercise-template">
         <div class="exercise-card">
-            <h3 class="exercise-name">Nome Esercizio</h3>
-            <p class="exercise-details">Serie: <span class="sets-count"></span> | Ripetizioni: <span class="reps-target"></span></p>
-            <p class="exercise-mode">Modalità: <span class="exec-mode"></span></p>
-
-            <div class="sets-container">
-                <!-- Le righe delle serie verranno inserite qui -->
+            <div class="exercise-header">
+                <h3 class="exercise-name">Nome Esercizio</h3>
+                <span class="collapse-icon">▼</span>
             </div>
-            <div class="exercise-notes">
-                <label>Note esecuzione:</label>
-                <textarea class="notes-input" placeholder="Aggiungi note sull'esecuzione..."></textarea>
+            <div class="exercise-body">
+                <p class="exercise-details">Serie: <span class="sets-count"></span> | Ripetizioni: <span class="reps-target"></span></p>
+                <p class="exercise-mode">Modalità: <span class="exec-mode"></span></p>
+
+                <div class="sets-container">
+                    <!-- Le righe delle serie verranno inserite qui -->
+                </div>
+                <div class="exercise-notes">
+                    <label>Note esecuzione:</label>
+                    <textarea class="notes-input" placeholder="Aggiungi note sull'esecuzione..."></textarea>
+                </div>
             </div>
         </div>
     </template>
@@ -549,6 +572,20 @@ document.addEventListener('DOMContentLoaded', () => {
             card.querySelector('.sets-count').textContent = esercizio.serie;
             card.querySelector('.reps-target').textContent = esercizio.ripetizioni;
             card.querySelector('.exec-mode').textContent = esercizio.modalita || 'Normale';
+
+            // Setup collapse logic
+            const header = card.querySelector('.exercise-header');
+            const body = card.querySelector('.exercise-body');
+            const icon = card.querySelector('.collapse-icon');
+
+            header.addEventListener('click', () => {
+                body.classList.toggle('hidden');
+                if (body.classList.contains('hidden')) {
+                    icon.textContent = '▶';
+                } else {
+                    icon.textContent = '▼';
+                }
+            });
 
             const setsContainer = card.querySelector('.sets-container');
             const sessionExerciseData = {

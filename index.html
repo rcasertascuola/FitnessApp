@@ -597,10 +597,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     endSessionBtn.addEventListener('click', () => {
+        if (!currentSession) return;
+
         if (confirm('Sei sicuro di voler terminare la sessione?')) {
             stopTimer();
             currentSession.endTime = new Date().toISOString();
             currentSession.duration = sessionSeconds;
+
+            // Aggiorna i dati della sessione prendendoli dal DOM per catturare input non confermati
+            const exerciseCards = exercisesContainer.querySelectorAll('.exercise-card');
+            exerciseCards.forEach((card, exIndex) => {
+                if (currentSession.exercises[exIndex]) {
+                    const notesInput = card.querySelector('.notes-input');
+                    if (notesInput) {
+                        currentSession.exercises[exIndex].notes = notesInput.value;
+                    }
+
+                    const setRows = card.querySelectorAll('.set-row');
+                    setRows.forEach((row, setIndex) => {
+                        if (currentSession.exercises[exIndex].sets[setIndex]) {
+                            const weightInput = row.querySelector('.weight-input');
+                            const repsInput = row.querySelector('.reps-input');
+                            const btnCheck = row.querySelector('.btn-check-set');
+
+                            currentSession.exercises[exIndex].sets[setIndex].weight = parseFloat(weightInput.value) || 0;
+                            currentSession.exercises[exIndex].sets[setIndex].reps = parseInt(repsInput.value) || 0;
+                            currentSession.exercises[exIndex].sets[setIndex].completed = btnCheck.classList.contains('active');
+                        }
+                    });
+                }
+            });
 
             saveSessionToHistory(currentSession);
 

@@ -435,7 +435,7 @@ textarea {
                 <input type="number" class="reps-input" placeholder="Reps" min="0">
                 <span class="input-label">Reps</span>
             </div>
-            <button class="btn-check-set">✓</button>
+            <button class="btn-check-set" aria-label="Segna serie come completata" title="Segna serie come completata">✓</button>
         </div>
     </template>
 
@@ -645,9 +645,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (setData.completed) {
                         btnCheck.classList.add('active');
                         setRow.classList.add('completed');
+                        btnCheck.setAttribute('aria-label', 'Segna serie come da completare');
+                        btnCheck.setAttribute('title', 'Segna serie come da completare');
                     } else {
                         btnCheck.classList.remove('active');
                         setRow.classList.remove('completed');
+                        btnCheck.setAttribute('aria-label', 'Segna serie come completata');
+                        btnCheck.setAttribute('title', 'Segna serie come completata');
                     }
                 });
 

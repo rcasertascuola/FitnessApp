@@ -1,0 +1,3 @@
+## 2026-04-23 - Dynamic ARIA attributes on stateful icon buttons
+**Learning:** When using icon-only buttons to represent binary states (like checking off a set), simply adding a static `aria-label` isn't enough. The accessibility state must be kept in sync with the visual state via JavaScript toggles, otherwise screen readers will report inaccurate information (e.g., saying "mark as complete" when the set is already completed).
+**Action:** Always check the JavaScript event listeners of interactive UI components to ensure that `aria-label` and `title` attributes are updated alongside visual classes like `.active` or `.completed`.

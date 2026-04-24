@@ -1,3 +1,6 @@
 ## 2026-04-23 - Dynamic ARIA attributes on stateful icon buttons
 **Learning:** When using icon-only buttons to represent binary states (like checking off a set), simply adding a static `aria-label` isn't enough. The accessibility state must be kept in sync with the visual state via JavaScript toggles, otherwise screen readers will report inaccurate information (e.g., saying "mark as complete" when the set is already completed).
 **Action:** Always check the JavaScript event listeners of interactive UI components to ensure that `aria-label` and `title` attributes are updated alongside visual classes like `.active` or `.completed`.
+## 2024-05-24 - Interactive `div` Elements as Buttons
+**Learning:** Using a non-semantic element like a `div` as an interactive control (such as an accordion toggle) requires additional work to be accessible to screen readers and keyboard users. Specifically, it must have `role="button"`, be focusable via `tabindex="0"`, have a visible focus state, and respond to both 'Enter' and 'Space' keyboard events, in addition to managing ARIA states like `aria-expanded`.
+**Action:** Whenever implementing custom interactive elements instead of native `<button>` or `<details>`/`<summary>`, ensure to manually wire up the appropriate `role`, `tabindex`, keyboard event listeners, and dynamic ARIA attributes.

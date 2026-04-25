@@ -194,6 +194,11 @@ textarea {
     margin-bottom: 5px;
 }
 
+.exercise-header:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .exercise-name {
     margin-bottom: 0;
     color: var(--primary-color);
@@ -399,7 +404,7 @@ textarea {
     <!-- Template per un esercizio -->
     <template id="exercise-template">
         <div class="exercise-card">
-            <div class="exercise-header">
+            <div class="exercise-header" tabindex="0" role="button" aria-expanded="true">
                 <h3 class="exercise-name">Nome Esercizio</h3>
                 <span class="collapse-icon">▼</span>
             </div>
@@ -607,12 +612,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const body = card.querySelector('.exercise-body');
             const icon = card.querySelector('.collapse-icon');
 
-            header.addEventListener('click', () => {
+            const toggleExercise = () => {
                 body.classList.toggle('hidden');
-                if (body.classList.contains('hidden')) {
+                const isHidden = body.classList.contains('hidden');
+                header.setAttribute('aria-expanded', !isHidden);
+                if (isHidden) {
                     icon.textContent = '▶';
                 } else {
                     icon.textContent = '▼';
+                }
+            };
+
+            header.addEventListener('click', toggleExercise);
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault(); // Prevent default scroll for Space
+                    toggleExercise();
                 }
             });
 

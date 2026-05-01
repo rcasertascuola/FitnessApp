@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodybuilding Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/utils.js"></script>
     <style>
 :root {
     --primary-color: #007bff;
@@ -404,7 +405,7 @@ textarea {
     <!-- Template per un esercizio -->
     <template id="exercise-template">
         <div class="exercise-card">
-            <div class="exercise-header" tabindex="0" role="button" aria-expanded="true">
+            <div class="exercise-header" role="button" tabindex="0" aria-expanded="true">
                 <h3 class="exercise-name">Nome Esercizio</h3>
                 <span class="collapse-icon">▼</span>
             </div>
@@ -524,12 +525,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- TIMER LOGIC ---
-    function formatTime(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
 
     function startTimer() {
         if (timerInterval) clearInterval(timerInterval);
@@ -612,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const body = card.querySelector('.exercise-body');
             const icon = card.querySelector('.collapse-icon');
 
-            const toggleExercise = () => {
+            const toggleCollapse = () => {
                 body.classList.toggle('hidden');
                 const isHidden = body.classList.contains('hidden');
                 header.setAttribute('aria-expanded', !isHidden);
@@ -623,11 +618,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            header.addEventListener('click', toggleExercise);
+            header.addEventListener('click', toggleCollapse);
             header.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault(); // Prevent default scroll for Space
-                    toggleExercise();
+                    e.preventDefault();
+                    toggleCollapse();
                 }
             });
 

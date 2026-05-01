@@ -4,3 +4,6 @@
 ## 2026-04-25 - Custom interactive elements need full keyboard support
 **Learning:** When using standard `div` elements as interactive toggles (like the exercise card accordion headers), adding a `click` listener is not sufficient. Users relying on keyboard navigation cannot focus the element or activate it. They require `tabindex`, a valid semantic `role`, a clear focus indicator, and explicit `keydown` support for Enter/Space to be fully accessible.
 **Action:** When building custom interactive components that aren't native `<button>` or `<a>` tags, always ensure they are focusable, have visible focus styles, and respond to both click and keyboard activation.
+## 2024-05-24 - Interactive `div` Elements as Buttons
+**Learning:** Using a non-semantic element like a `div` as an interactive control (such as an accordion toggle) requires additional work to be accessible to screen readers and keyboard users. Specifically, it must have `role="button"`, be focusable via `tabindex="0"`, have a visible focus state, and respond to both 'Enter' and 'Space' keyboard events, in addition to managing ARIA states like `aria-expanded`.
+**Action:** Whenever implementing custom interactive elements instead of native `<button>` or `<details>`/`<summary>`, ensure to manually wire up the appropriate `role`, `tabindex`, keyboard event listeners, and dynamic ARIA attributes.

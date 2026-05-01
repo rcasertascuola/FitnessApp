@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodybuilding Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/utils.js"></script>
     <style>
 :root {
     --primary-color: #007bff;
@@ -519,12 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- TIMER LOGIC ---
-    function formatTime(totalSeconds) {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
 
     function startTimer() {
         if (timerInterval) clearInterval(timerInterval);
